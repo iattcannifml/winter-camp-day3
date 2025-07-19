@@ -89,12 +89,5 @@ git push
 
 ---
 
-## 📝 Submission Summary (if required)
-
-> GitHub Repo: https://github.com/yourusername/laptop-selector  
-> Summary: This is my Day 3 project from the winter bootcamp. It is a laptop recommendation system built with Flask. Features include editable input, flexible filters, memory unit conversion, and dynamic brand listing.
-
----
-
 This project demonstrates how Python and Flask can be used to build a smart, user-friendly recommendation system.  
 Great for school projects, learning Flask, or just geeking out about laptops 😎
