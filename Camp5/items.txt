@@ -1,0 +1,5 @@
+ZenBook14,30000,512GB,ASUS,14.0,Windows,https://www.asus.com/Laptops/Zenbook-14;
+MacBookAir,42000,256GB,Apple,13.3,MacOS,https://www.apple.com/macbook-air;
+Gram16,38000,1TB,LG,16.0,Windows,https://www.lg.com/laptops/lg-gram-16;
+SurfaceLaptop5,45000,512GB,Microsoft,15.0,Windows,https://www.microsoft.com/surface-laptop-5;
+MacBookPro,62000,1TB,Apple,16.2,MacOS,https://www.apple.com/macbook-pro

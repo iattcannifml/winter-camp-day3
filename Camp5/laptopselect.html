@@ -1,0 +1,147 @@
+from flask import Flask, request
+
+app = Flask(__name__)
+
+def brandOptions(item):
+    brands = []
+    for line in item:
+        parts = line.split(',')
+        if len(parts) > 3:
+            brand = parts[3]
+            if brand not in brands:
+                brands.append(brand)
+    html = '<option value="0">無要求</option>\n'
+    for brand in brands:
+        html += f'<option value="{brand}">{brand}</option>\n'
+    return html
+
+@app.route('/list')
+def List():
+    html = "<form action='/select'>"
+    infile = open('items.txt', 'r')
+    it = []
+    for line in infile:
+        it.append(line[:-1].split(","))
+    infile.close()
+    html += '<textarea name="computers" rows=30 cols=120>'
+    for l in it:
+        html += (','.join(l))
+        html += "\n"
+    html += '</textarea><br>'
+    html += '''以上為內建資料，可自行增減電腦項目（型號,價格,記憶體容量,廠牌,螢幕尺寸,作業系統,超連結）<br>以逗號間隔，分號結尾，最後一行不用分號<br><input type=submit></form>'''
+    return html
+
+@app.route('/select')
+def select():
+    global item
+    item = request.values['computers'].split(";")
+    html = '''<form action='/result'>
+    預算：<br>
+    <input type=text name="price">
+    <br><br>
+    記憶體容量：<br>
+    <select name="capacity">
+    <option value="0">無要求</option>
+    <option value="128">128GB</option>
+    <option value="256">256GB</option>
+    <option value="512">512GB</option>
+    <option value="1024">1TB以上</option>
+    </select>
+    <br><br>
+    廠牌：<br>
+    <select name="brand">''' + brandOptions(item) + '''</select>
+    <br><br>
+    螢幕尺寸：<br>
+    <select name="size">
+    <option value="0">無要求</option>
+    <option value="s1">16吋以上</option>
+    <option value="s2">14-15吋</option>
+    <option value="s3">12-13吋</option>
+    </select>
+    <br><br>
+    作業系統：<br>
+    <select name="sys">
+    <option value="0">無要求</option>
+    <option value="Windows">Windows</option>
+    <option value="MacOS">MacOS</option>
+    </select>
+    <br><br>
+    <input type=submit></form>
+    '''
+    return html
+
+@app.route("/result")
+def result():
+    raw_price = request.values['price']
+    p = int(raw_price) if raw_price.isdigit() else 0
+    c = int(request.values['capacity'])
+    b = request.values['brand']
+    s = request.values['size']
+    y = request.values['sys']
+
+    items = []
+    points = []
+    for i in range(len(item)):
+        parts = item[i].strip().split(',')
+        if len(parts) < 6:
+            continue
+        items.append(parts)
+        points.append([0, 0, 0, 0, 0])
+
+    for i in range(len(items)):
+        # 預算
+        if p == 0 or int(items[i][1]) <= p:
+            points[i][0] += 1
+
+        # 記憶體容量轉換（MB, GB, TB）
+        mem = items[i][2].upper()
+        if "TB" in mem:
+            x = int(mem.replace("TB", "")) * 1024
+        elif "GB" in mem:
+            x = int(mem.replace("GB", ""))
+        elif "MB" in mem:
+            x = int(mem.replace("MB", "")) // 1024
+        else:
+            x = 0
+
+        if c == 0 or x == c or (x >= 1024 and c == 1024):
+            points[i][1] += 1
+
+        # 廠牌
+        if items[i][3] == b or b == "0":
+            points[i][2] += 1
+
+        # 螢幕尺寸
+        screen = float(items[i][4]) if items[i][4] else 0
+        if s == "s1" and screen >= 16:
+            points[i][3] += 1
+        elif s == "s2" and 14 <= screen < 16:
+            points[i][3] += 1
+        elif s == "s3" and 12 <= screen < 14:
+            points[i][3] += 1
+        elif s == "0":
+            points[i][3] += 1
+
+        # 作業系統
+        if items[i][5] == y or y == "0":
+            points[i][4] += 1
+
+    html = "<h3>所有符合條件的筆電（分數≧3）：</h3><ul>"
+    found = False
+    for i in range(len(items)):
+        total = sum(points[i])
+        if total >= 3:
+            found = True
+            link = items[i][6] if len(items[i]) > 6 else '#'
+            html += f'<li><a href="{link}">{items[i][0]}</a>（總分：{total}）<ul>'
+            fields = ['價格', '記憶體容量', '廠牌', '螢幕尺寸', '作業系統']
+            for j in range(5):
+                html += f'<li>{fields[j]}: {items[i][j+1]} '
+                html += '(符合需求)' if points[i][j] == 1 else '(不符合需求)'
+            html += '</ul></li>'
+    html += '</ul>'
+
+    if not found:
+        html = "沒有相符合的型號"
+
+    return html

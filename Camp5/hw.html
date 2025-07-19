@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cubic Function Graph</title>
+  <style>
+    canvas {
+      border: 1px solid #000000;
+    }
+  </style>
+</head>
+<body>
+  <h2>Cubic Function: y = x³ - 3x² + 2x - 1</h2>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+  <script>
+
+    function f(x) {
+      return Math.pow(x, 3) - 3 * Math.pow(x, 2) + 2 * x - 1;
+    }
+
+    function draw(y_scale = 1.0) {
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+
+      const x0 = 200;  
+      const y0 = 200;  
+      let x = -50;     
+      ctx.moveTo(x + x0, y0 - f(x) * y_scale);  
+
+     
+      for (x = -49; x <= 50; ++x) {
+        const y = f(x);
+        ctx.lineTo(x0 + x, y0 - y * y_scale);  
+      }
+
+      ctx.stroke();  
+    }
+
+    draw(0.01);  
+  </script>
+</body>
+</html>
