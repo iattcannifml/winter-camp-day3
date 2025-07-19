@@ -6,6 +6,12 @@ then recommends suitable laptop models based on a scoring system.
 
 ---
 
+## 📅 Date  
+**January 20, 2025 (Day 3)**
+
+---
+
+
 ## 🚀 Features
 
 - ✅ Editable laptop data through web interface
