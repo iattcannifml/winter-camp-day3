@@ -29,7 +29,7 @@ then recommends suitable laptop models based on a scoring system.
 You must provide a file named `items.txt` that contains laptop data.  
 Each line represents a laptop, with fields separated by commas `,`, and **each line ends with a semicolon `;`**, except the last line.
 
-### ✅ Format:
+### Format:
 ```
 Model,Price,Memory,Brand,ScreenSize,OS,Link
 ```
