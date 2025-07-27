@@ -34,7 +34,7 @@ Each line represents a laptop, with fields separated by commas `,`, and **each l
 Model,Price,Memory,Brand,ScreenSize,OS,Link
 ```
 
-### 🧾 Example:
+### Example:
 ```
 ZenBook14,30000,512GB,ASUS,14.0,Windows,https://www.asus.com/Laptops/Zenbook-14;
 MacBookAir,42000,256GB,Apple,13.3,MacOS,https://www.apple.com/macbook-air;
