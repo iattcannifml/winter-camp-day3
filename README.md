@@ -1,4 +1,4 @@
-# 💻 Laptop Recommendation System (Flask App)
+# Laptop Recommendation System (Flask App)
 
 This is the Day 3 project of a winter bootcamp: a laptop recommendation system built using Python and Flask.  
 The app allows users to input preferences such as **budget**, **memory**, **brand**, **screen size**, and **OS**,  
@@ -6,25 +6,25 @@ then recommends suitable laptop models based on a scoring system.
 
 ---
 
-## 📅 Date  
+## Date  
 **January 20, 2025 (Day 3)**
 
 ---
 
 
-## 🚀 Features
+## Features
 
-- ✅ Editable laptop data through web interface
-- ✅ Automatically generates brand options from the data (not hardcoded)
-- ✅ Budget field can be left blank (treated as no budget limit)
-- ✅ Memory unit supports MB / GB / TB with automatic conversion
-- ✅ Recommends **all laptops** that score 3 or more points
-- ✅ Displays how well each laptop matches your criteria
-- ✅ Clickable product links (URL from the last column)
+- Editable laptop data through web interface
+- Automatically generates brand options from the data (not hardcoded)
+- Budget field can be left blank (treated as no budget limit)
+- Memory unit supports MB / GB / TB with automatic conversion
+- Recommends **all laptops** that score 3 or more points
+- Displays how well each laptop matches your criteria
+- Clickable product links (URL from the last column)
 
 ---
 
-## 📁 Data Format (items.txt)
+## Data Format (items.txt)
 
 You must provide a file named `items.txt` that contains laptop data.  
 Each line represents a laptop, with fields separated by commas `,`, and **each line ends with a semicolon `;`**, except the last line.
@@ -45,7 +45,7 @@ MacBookPro,62000,1TB,Apple,16.2,MacOS,https://www.apple.com/macbook-pro
 
 ---
 
-## ▶️ How to Run
+##  How to Run
 
 1. Make sure you have Python and Flask installed:
    ```bash
@@ -66,9 +66,9 @@ MacBookPro,62000,1TB,Apple,16.2,MacOS,https://www.apple.com/macbook-pro
 
 ---
 
-## 🛫 GitHub Submission Guide
+## GitHub Submission Guide
 
-### ✅ First-time upload
+### First-time upload
 
 ```bash
 git init
@@ -79,7 +79,7 @@ git remote add origin https://github.com/your-username/your-repo-name.git
 git push -u origin main
 ```
 
-### ✅ Later updates
+### Later updates
 
 ```bash
 git add .
